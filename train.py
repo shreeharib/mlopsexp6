@@ -9,11 +9,17 @@ iris_df = load_iris()
 X = iris_df.data
 y = iris_df.target
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.1)
-data_dir = "./data"
-model_dir = "./model"
+
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
-joblib.dump(model,"logistic_model.joblib")
+os.makedirs("model",exist_ok=True)
+model_path = os.path.join("model","model.joblib")
+
+joblib.dump(model,model_path)
+
+with open("metrics.txt","w") as fw:
+  fw.write(f"\nAccuracy: {accuracy_score(y_test,model.predict(X_test))}")
+  fw.write(f"\n{classification_report(y_test,clf.predict(X_test))}")
 
 print("Training Completed")
