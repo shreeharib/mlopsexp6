@@ -14,6 +14,6 @@ model_dir = "./model"
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
-joblib.dump(model,os.path.join(model_dir,"logistic_model.joblib"))
+joblib.dump(model,"logistic_model.joblib")
 
 print("Training Completed")
